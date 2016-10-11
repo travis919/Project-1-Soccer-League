@@ -2,11 +2,13 @@ import csv
 
 # Read the CSV and get a Python dictionary back
 def open_csv(file_name):
+	'''Opens the CSV file, transforms it's contents into a list of dictionary objects, and returns the list'''
 	with open(file_name) as file:
 		player_dict = list(csv.DictReader(file, delimiter=','))
 	return player_dict
 
 def assigner(teams, players):
+	'''Takes a list of available teams, and a list of dicts. Adds a "Team" attribute to each dict and ensures teams assigned are even'''
 	count = 1
 	for player in players:
 		if count == 1:
@@ -22,6 +24,7 @@ def assigner(teams, players):
 
 
 def build_teams(player_dict):
+	'''Sorts players into experienced and inexperienced players'''
 	experienced_players = []
 	noobs = []
 	teams = ["Sharks", "Dragons", "Raptors"]
@@ -37,6 +40,7 @@ def build_teams(player_dict):
 
 
 def generate_letters(players):
+	'''Takes in a list of dicts and generates personalized letters for each player. Letter is addressed to players parents and includes their assigned team and data/time of first practice'''
 	for player in players:
 		name_split = player["Name"].lower().split()
 		name_join = "_".join(name_split)
